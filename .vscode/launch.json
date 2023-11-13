@@ -1,0 +1,13 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "ホロコレクトのモジュール実行",
+            "type": "python",
+            "request": "launch",
+            "module": "holocollect",
+            "justMyCode": true,
+            "args": ["--csvpath","c:\\temp\\holodule.csv"]
+        }
+    ]
+}

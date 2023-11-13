@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "holocollect"
+version = "0.1.0"
+description = "ホロジュールの配信情報を収集"
+authors = ["kerobot"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dotenv = "^1.0.0"
+pymongo = "^4.6.0"
+pylint = "^3.0.2"
+beautifulsoup4 = "^4.12.2"
+requests = "^2.31.0"
+selenium = "^4.15.2"
+oauth2client = "^4.1.3"
+google-api-python-client = "^2.107.0"
+lxml = "^4.9.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
