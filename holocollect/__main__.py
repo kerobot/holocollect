@@ -1,19 +1,25 @@
 import sys
 import os
 import argparse
-from logging import getLogger, DEBUG, NullHandler
 from os.path import join, dirname
 from holocollect.collector import Collector
+from holocollect.utils.logger import get_logger
 
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
 
 def main():
+    """
+    ホロジュールのHTMLをSelenium + BeautifulSoup4 + Youtube API で解析して MongoDB へ登録
+    
+    Returns:
+        int: 終了コード
+    """
+
     # Logger 関連
-    logger = getLogger(__name__)
-    logger.addHandler(NullHandler())
-    logger.setLevel(DEBUG)
-    logger.propagate = True
+    json_path = join(dirname(__file__), "configs/logger.json")
+    log_dir = join(dirname(__file__), "logs")
+    logger = get_logger(log_dir, json_path, False)
 
     # parser を作る（説明を指定できる）
     parser = argparse.ArgumentParser(description="ホロジュールのHTMLをSelenium + BeautifulSoup4 + Youtube API で解析して MongoDB へ登録")
@@ -35,7 +41,7 @@ def main():
         is_output = True
 
     try:
-        # HoloCrawlerオブジェクト
+        # Collectorオブジェクトの生成
         env_path = join(dirname(__file__), 'configs/.env')
         collector = Collector(env_path)
         logger.info("ホロジュールの取得を開始します。")

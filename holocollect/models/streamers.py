@@ -87,6 +87,7 @@ class Streamers:
             "Amelia" : Streamer("HLEN05", "Watson Amelia", "hololive_en", ["gen1","en"], "watson_amelia.jpg", "@WatsonAmelia"),
 
             "IRyS" : Streamer("HLEN06", "IRyS", "hololive_en", ["hope","gen2","en"], "irys.jpg", "@IRyS"),
+
             "Fauna" : Streamer("HLEN07", "Ceres Fauna", "hololive_en", ["gen2","en"], "ceres_fauna.jpg", "@CeresFauna"),
             "Kronii" : Streamer("HLEN08", "Ouro Kronii", "hololive_en", ["gen2","en"], "ouro_kronii.jpg", "@OuroKronii"),
             "Mumei" : Streamer("HLEN09", "Nanashi Mumei", "hololive_en", ["gen2","en"], "nanashi_mumei.jpg", "@NanashiMumei"),

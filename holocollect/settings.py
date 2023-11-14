@@ -1,17 +1,28 @@
 import os
 import urllib.request
 from dotenv import load_dotenv
+from logging import getLogger
 
 class Settings:
+    """
+    設定情報を保持するクラス
+    """
     def __init__(self, env_path: str) -> None:
         """
-        Settingsクラスのコンストラクタ
-
-        :param envpath: .envファイルのパス
+        Settingsクラスのインスタンスを生成する
+        
+        Args:
+            env_path (str): .envファイルのパス
+        
+        Raises:
+            ValueError: .envファイルの読み込みに失敗した場合
+            ValueError: 環境変数が設定されていない場合
         """
+        # Logger 関連
+        self._logger = getLogger(__name__)
+        # env 関連
         self.env_path: str = env_path
         self.__load_env()
-
         self.__holodule_url: str = self.__get_env("HOLODULE_URL")
         self.__api_key: str = self.__get_env("API_KEY")
         self.__api_service_name: str = self.__get_env("API_SERVICE_NAME")
@@ -25,8 +36,9 @@ class Settings:
     def holodule_url(self) -> str:
         """
         ホロジュールのURLを取得する
-
-        :return: ホロジュールのURL
+        
+        Returns:
+            str: ホロジュールのURL
         """
         return self.__holodule_url
 
@@ -35,7 +47,8 @@ class Settings:
         """
         Youtube Data API v3 のAPIキーを取得する
 
-        :return: APIキー
+        Returns:
+            str: APIキー
         """
         return self.__api_key
 
@@ -44,7 +57,8 @@ class Settings:
         """
         Youtube Data API v3 のAPIサービス名を取得する
 
-        :return: APIサービス名
+        Returns:
+            str: APIサービス名
         """
         return self.__api_service_name
 
@@ -53,7 +67,8 @@ class Settings:
         """
         Youtube Data API v3 のAPIバージョンを取得する
 
-        :return: APIバージョン
+        Returns:
+            str: APIバージョン
         """
         return self.__api_version
 
@@ -62,7 +77,8 @@ class Settings:
         """
         MongoDBのユーザーを取得する
 
-        :return: MongoDBのユーザー
+        Returns:
+            str: MongoDBのユーザー
         """
         return self.__mongodb_user
 
@@ -71,7 +87,8 @@ class Settings:
         """
         MongoDBのパスワードを取得する
 
-        :return: MongoDBのパスワード
+        Returns:
+            str: MongoDBのパスワード
         """
         return self.__mongodb_password
 
@@ -80,7 +97,8 @@ class Settings:
         """
         MongoDBのホスト:ポートを取得する
 
-        :return: MongoDBのホスト:ポート
+        Returns:
+            str: MongoDBのホスト:ポート
         """
         return self.__mongodb_host
 
@@ -89,13 +107,17 @@ class Settings:
         """
         Youtube URL として判定するパターンを取得する
 
-        :return: Youtube URL として判定するパターン
+        Returns:
+            str: Youtube URL として判定するパターン
         """
         return self.__youtube_url_pattern
 
     def __load_env(self) -> None:
         """
         .envファイルを読み込む
+        
+        Raises:
+            ValueError: .envファイルの読み込みに失敗した場合
         """
         try:
             load_dotenv(self.env_path)
@@ -106,8 +128,14 @@ class Settings:
         """
         環境変数を取得する
 
-        :param key: 環境変数のキー
-        :return: 環境変数の値
+        Args:
+            key (str): 環境変数のキー
+        
+        Returns:
+            str: 環境変数の値
+        
+        Raises:
+            ValueError: 環境変数が設定されていない場合
         """
         value = os.environ.get(key)
         if value is None:
@@ -118,8 +146,14 @@ class Settings:
         """
         指定したURLにアクセスできるかをチェックする
 
-        :param url: チェックするURL
-        :return: アクセスできる場合はTrue、できない場合はFalse
+        Args:
+            url (str): URL
+        
+        Returns:
+            bool: アクセスできる場合はTrue、できない場合はFalse
+        
+        Raises:
+            ValueError: URLが指定されていない場合
         """
         try:
             async with urllib.request.urlopen(url) as response:
@@ -131,6 +165,7 @@ class Settings:
         """
         ホロジュールのURLにアクセスできるかをチェックする
 
-        :return: アクセスできる場合はTrue、できない場合はFalse
+        Returns:
+            bool: アクセスできる場合はTrue、できない場合はFalse
         """
         return await self.__check_url(self.__holodule_url)

@@ -1,10 +1,6 @@
-"""
-【ホロライブ】ホロジュールと Youtube の動画情報を取得して MongoDB へ登録する
-"""
-
 import re
 import datetime
-from logging import getLogger, DEBUG, NullHandler
+from logging import getLogger
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -19,15 +15,24 @@ from holocollect.models.holodules import Holodules
 from holocollect.models.streamers import Streamers
 
 class Collector:
-    # コンストラクタ
+    """
+    【ホロライブ】ホロジュールと Youtube の動画情報を取得して MongoDB へ登録するクラス
+    """
+
     def __init__(self, env_path: str = ".env"):
-        # Setting関連
+        """
+        Collectorクラスのインスタンスを生成する
+        
+        Args:
+            env_path (str, optional): 環境変数ファイルのパス. Defaults to ".env".
+        
+        Raises:
+            Exception: 環境変数ファイルのパスが不正な場合
+        """
+        # Setting 関連
         settings = Settings(env_path);
         # Logger 関連
         self._logger = getLogger(__name__)
-        self._logger.addHandler(NullHandler())
-        self._logger.setLevel(DEBUG)
-        self._logger.propagate = True
         # WebDriver 関連
         self.__driver = None
         self.__wait = None
@@ -51,15 +56,28 @@ class Collector:
         # youtube url の判定パターン
         self.__youtube_url_pattern = settings.youtube_url_pattern
 
-    # ブラウザオプションの設定
     def __setup_options(self):
+        """
+        Selenium のオプションのセットアップ
+        
+        Returns:
+            webdriver.ChromeOptions: オプション
+        """
         options = webdriver.ChromeOptions()
         # ヘッドレスモードとする
         options.add_argument('--headless=new')
         return options
 
-    # ホロジュールの取得
     def __get_holodules(self):
+        """
+        ホロジュール情報の取得
+        
+        Returns:
+            Holodules: ホロジュール情報のリスト
+        
+        Raises:
+            Exception: ホロジュールの取得に失敗した場合
+        """
         # 取得対象の URL に遷移
         self.__driver.get(self.__holodule_url)
         # <div class="holodule" style="margin-top:10px;">が表示されるまで待機する
@@ -97,7 +115,7 @@ class Collector:
                     year = year + 1
                 date_string = f"{year}/{month}/{day}"
 
-            # ライバー毎のスケジュール
+            # 配信者毎のスケジュール
             thumbnails = container.find_all("a", class_="thumbnail")
             if thumbnails is not None:
                 for thumbnail in thumbnails:
@@ -116,7 +134,7 @@ class Collector:
                     minute = int(times[1])
                     datetime_string = f"{date_string} {hour}:{minute}"
                     stream_datetime = datetime.datetime.strptime(datetime_string, "%Y/%m/%d %H:%M")
-                    # ライバーの名前
+                    # 配信者の名前
                     div_name = thumbnail.find("div", class_="col text-right name")
                     if div_name is None:
                         continue
@@ -129,8 +147,20 @@ class Collector:
                     holodules.append(holodule)
         return holodules
 
-    # Youtube 動画情報の取得
     def __get_youtube_video_info(self, youtube_url: str):
+        """
+        Youtube 動画情報の取得
+        
+        Args:
+            youtube_url (str): Youtube の URL
+        
+        Returns:
+            tuple: 動画情報（video_id, title, description, published_at, channel_id, channel_title, tags）
+        
+        Raises:
+            HttpError: Youtube の API でエラーが発生した場合
+            Exception: その他のエラーが発生した場合
+        """
         try:
             self._logger.info('YOUTUBE_URL : %s', youtube_url)
             # Youtube の URL から ID を取得
@@ -179,8 +209,16 @@ class Collector:
             self._logger.error("エラーが発生しました。%s" % e)
             raise
 
-    # ホロジュールのスクレイピングと Youtube 動画情報から、配信情報リストの取得
     def get_holodules(self):
+        """
+        ホロジュールのスクレイピングと Youtube 動画情報から、ホロジュール情報のリストを取得
+        
+        Returns:
+            Holodules: ホロジュール情報のリスト
+        
+        Raises:
+            Exception: ホロジュールの取得に失敗した場合
+        """
         try:
             # オプションのセットアップ
             options = self.__setup_options()
@@ -188,11 +226,12 @@ class Collector:
             self.__driver = webdriver.Chrome(options=options)
             # 指定したドライバに対して最大で10秒間待つように設定する
             self.__wait = WebDriverWait(self.__driver, 10)
-            # ホロジュールの取得
+            # ホロジュール情報の取得
             self.__holodules = self.__get_holodules()
             # Youtube情報の取得
             for holodule in self.__holodules:
                 try:
+                    # ホロジュール情報に動画情報を付与
                     self._logger.info('HOLODULE_NAME : %s', holodule.name)
                     self._logger.info('HOLODULE_DATETIME : %s', holodule.datetime)
                     video_info = self.__get_youtube_video_info(holodule.url)
@@ -212,14 +251,28 @@ class Collector:
                 self.__driver.close()
         return self.__holodules
 
-    # MongoDB への登録
     def save_to_mongodb(self):
-        # ストリーマ情報の登録
+        """
+        配信者情報とホロジュール情報を MongoDB へ登録する
+        
+        Raises:
+            Exception: MongoDB への登録に失敗した場合
+        """
+        # 配信者情報の登録
         self.__streamers.save_to_mongodb(self.__mongodb_holoduledb, self.__mongodb_db, self.__mongodb_streamers)
         # ホロジュール情報の登録
         self.__holodules.save_to_mongodb(self.__mongodb_holoduledb, self.__mongodb_db, self.__mongodb_holodules)
 
     # CSV への出力
     def output_to_csv(self, filepath: str):
+        """
+        ホロジュール情報を CSV へ出力する
+        
+        Args:
+            filepath (str): 出力するCSVファイルのパス
+        
+        Raises:
+            Exception: CSV への出力に失敗した場合
+        """
         # ホロジュール情報の出力
         self.__holodules.output_to_csv(filepath)
