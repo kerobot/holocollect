@@ -1,9 +1,8 @@
 import sys
 import os
 import argparse
-from os.path import join, dirname
 from holocollect.collector import Collector
-from holocollect.utils.logger import get_logger
+from holocollect.logger import get_logger
 
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1
@@ -17,9 +16,7 @@ def main():
     """
 
     # Logger 関連
-    json_path = join(dirname(__file__), "configs/logger.json")
-    log_dir = join(dirname(__file__), "logs")
-    logger = get_logger(log_dir, json_path, False)
+    logger = get_logger("logs", "logger.json", False)
 
     # parser を作る（説明を指定できる）
     parser = argparse.ArgumentParser(description="ホロジュールのHTMLをSelenium + BeautifulSoup4 + Youtube API で解析して MongoDB へ登録")
@@ -42,19 +39,18 @@ def main():
 
     try:
         # Collectorオブジェクトの生成
-        env_path = join(dirname(__file__), 'configs/.env')
-        collector = Collector(env_path)
+        collector = Collector()
         logger.info("ホロジュールの取得を開始します。")
         # ホロジュールの取得
-        holodules = collector.get_holodules()
-        logger.info("ホロジュールを取得しました。 : %s件", len(holodules))
+        schedules = collector.get_holodules()
+        logger.info("ホロジュールを取得しました。 : %s件", len(schedules))
         # ホロジュールの登録
         collector.save_to_mongodb()
         logger.info("ホロジュールを登録しました。")
         # ホロジュールの出力
         if is_output == True:
             collector.output_to_csv(csvpath)
-            logger.info("ホロジュールを出力しました。 : %s件", len(holodules))
+            logger.info("ホロジュールを出力しました。 : %s件", len(schedules))
         return RETURN_SUCCESS
     except:
         logger.error("エラーが発生しました。", exc_info=True)

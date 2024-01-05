@@ -1,159 +1,66 @@
-import os
 import urllib.request
-from dotenv import load_dotenv
-from logging import getLogger
+from functools import lru_cache
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-class Settings:
+class MongoSettings(BaseSettings):
     """
-    設定情報を保持するクラス
+    MongoDBの設定を管理するクラス
+    
+    Args:
+        uri (str): MongoDBの接続URI
+        database (str): 使用するデータベース名
+        model_config (SettingsConfigDict): モデルの設定辞書
     """
-    def __init__(self, env_path: str) -> None:
-        """
-        Settingsクラスのインスタンスを生成する
-        
-        Args:
-            env_path (str): .envファイルのパス
-        
-        Raises:
-            ValueError: .envファイルの読み込みに失敗した場合
-            ValueError: 環境変数が設定されていない場合
-        """
-        # Logger 関連
-        self._logger = getLogger(__name__)
-        # env 関連
-        self.env_path: str = env_path
-        self.__load_env()
-        self.__holodule_url: str = self.__get_env("HOLODULE_URL")
-        self.__api_key: str = self.__get_env("API_KEY")
-        self.__api_service_name: str = self.__get_env("API_SERVICE_NAME")
-        self.__api_version: str = self.__get_env("API_VERSION")
-        self.__mongodb_user: str = self.__get_env("MONGODB_USER")
-        self.__mongodb_password: str = self.__get_env("MONGODB_PASSWORD")
-        self.__mongodb_host: str = self.__get_env("MONGODB_HOST")
-        self.__youtube_url_pattern: str = self.__get_env("YOUTUBE_URL_PATTERN")
+    uri: str
+    database: str
+    model_config = SettingsConfigDict(env_file=".env", env_prefix='mongo_')
 
-    @property
-    def holodule_url(self) -> str:
-        """
-        ホロジュールのURLを取得する
-        
-        Returns:
-            str: ホロジュールのURL
-        """
-        return self.__holodule_url
+class YoutubeSettings(BaseSettings):
+    """
+    YouTubeの設定を管理するクラス
 
-    @property
-    def api_key(self) -> str:
+    Args:
+        api_key (str): YouTube Data APIのAPIキー
+        api_service_name (str): YouTube Data APIのサービス名
+        api_version (str): YouTube Data APIのバージョン
+        url_pattern (str): YouTubeのURLパターン
+        model_config (SettingsConfigDict): モデルの設定辞書
+    """
+    api_key: str
+    api_service_name: str
+    api_version: str
+    url_pattern: str
+    model_config = SettingsConfigDict(env_file=".env", env_prefix='youtube_')
+
+class HoloduleSettings(BaseSettings):
+    """
+    Holoduleの設定を管理するクラス
+
+    Args:
+        url (str): HoloduleのURL
+        model_config (SettingsConfigDict): モデルの設定辞書
+    """
+    url: str
+    model_config = SettingsConfigDict(env_file=".env", env_prefix='holodule_')
+
+    async def check_holodule_url(self) -> bool:
         """
-        Youtube Data API v3 のAPIキーを取得する
+        HoloduleのURLが有効かどうかを確認する関数
 
         Returns:
-            str: APIキー
+            bool: URLが有効かどうか
         """
-        return self.__api_key
-
-    @property
-    def api_service_name(self) -> str:
-        """
-        Youtube Data API v3 のAPIサービス名を取得する
-
-        Returns:
-            str: APIサービス名
-        """
-        return self.__api_service_name
-
-    @property
-    def api_version(self) -> str:
-        """
-        Youtube Data API v3 のAPIバージョンを取得する
-
-        Returns:
-            str: APIバージョン
-        """
-        return self.__api_version
-
-    @property
-    def mongodb_user(self) -> str:
-        """
-        MongoDBのユーザーを取得する
-
-        Returns:
-            str: MongoDBのユーザー
-        """
-        return self.__mongodb_user
-
-    @property
-    def mongodb_password(self) -> str:
-        """
-        MongoDBのパスワードを取得する
-
-        Returns:
-            str: MongoDBのパスワード
-        """
-        return self.__mongodb_password
-
-    @property
-    def mongodb_host(self) -> str:
-        """
-        MongoDBのホスト:ポートを取得する
-
-        Returns:
-            str: MongoDBのホスト:ポート
-        """
-        return self.__mongodb_host
-
-    @property
-    def youtube_url_pattern(self) -> str:
-        """
-        Youtube URL として判定するパターンを取得する
-
-        Returns:
-            str: Youtube URL として判定するパターン
-        """
-        return self.__youtube_url_pattern
-
-    def __load_env(self) -> None:
-        """
-        .envファイルを読み込む
-        
-        Raises:
-            ValueError: .envファイルの読み込みに失敗した場合
-        """
-        try:
-            load_dotenv(self.env_path)
-        except Exception as e:
-            raise ValueError(f"Failed to load .env file: {e}")
-
-    def __get_env(self, key: str) -> str:
-        """
-        環境変数を取得する
-
-        Args:
-            key (str): 環境変数のキー
-        
-        Returns:
-            str: 環境変数の値
-        
-        Raises:
-            ValueError: 環境変数が設定されていない場合
-        """
-        value = os.environ.get(key)
-        if value is None:
-            raise ValueError(f"Missing environment variable: {key}")
-        return value
+        return await self.__check_url(self.url)
 
     async def __check_url(self, url: str) -> bool:
         """
-        指定したURLにアクセスできるかをチェックする
+        URLが有効かどうかを確認する関数
 
         Args:
-            url (str): URL
-        
+            url (str): 確認するURL
+
         Returns:
-            bool: アクセスできる場合はTrue、できない場合はFalse
-        
-        Raises:
-            ValueError: URLが指定されていない場合
+            bool: URLが有効かどうか
         """
         try:
             async with urllib.request.urlopen(url) as response:
@@ -161,11 +68,32 @@ class Settings:
         except Exception:
             return False
 
-    async def check_holodule_url(self) -> bool:
-        """
-        ホロジュールのURLにアクセスできるかをチェックする
+@lru_cache
+def get_mongo_settings() -> MongoSettings:
+    """
+    キャッシュしたMongoDBの設定を取得する関数
 
-        Returns:
-            bool: アクセスできる場合はTrue、できない場合はFalse
-        """
-        return await self.__check_url(self.__holodule_url)
+    Returns:
+        MongoSettings: MongoDBの設定
+    """
+    return MongoSettings()
+
+@lru_cache
+def get_youtube_settings() -> YoutubeSettings:
+    """
+    キャッシュしたYoutubeの設定を取得する関数
+
+    Returns:
+        YoutubeSettings: Youtubeの設定
+    """
+    return YoutubeSettings()
+
+@lru_cache
+def get_holodule_settings() -> HoloduleSettings:
+    """
+    キャッシュしたホロジュールの設定を取得する関数
+
+    Returns:
+        HoloduleSettings: ホロジュールの設定
+    """
+    return HoloduleSettings()

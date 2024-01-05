@@ -13,7 +13,7 @@ def get_logger(log_dir: str, json_path: str, verbose: bool=False) -> Logger | No
         verbose (bool, optional): ログレベルをDEBUGにするかどうかのフラグ。デフォルトはFalse。
 
     Returns:
-        Optional[Logger]: ロガーオブジェクト。設定ファイルが存在しない場合や、設定ファイルの形式が不正な場合はNoneを返す。
+        Logger | None: ロガーオブジェクト。設定ファイルが存在しない場合や、設定ファイルの形式が不正な場合はNoneを返す。
     """
     try:
         with open(json_path, "r", encoding="utf-8") as f:
