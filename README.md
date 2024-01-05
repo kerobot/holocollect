@@ -41,14 +41,6 @@ MongoDB > use holoduledb
 MongoDB > db.createUser( { user:"owner", pwd:"password", roles:[{ "role" : "dbOwner", "db" : "holoduledb" }] } );
 ```
 
-## Web API からアクセスする際のユーザー情報を登録（参考）
-
-```powershell
-MongoDB > db.createCollection("users");
-MongoDB > db.users.save( {"id":"1", "username":"dummy", "password":"dummy", "firstname":"dummy", "lastname":"dummy"} );
-MongoDB > db.users.find();
-```
-
 ## Web スクレイピングのために google-chrome と chromedriver を導入
 
 ※ Windows の場合
@@ -82,7 +74,7 @@ google-chrome --version
 * ライブラリで YouTube Data API v3 を有効化
 * 認証情報で認証情報を作成して APIキー を取得
 
-## configs ディレクトリ内に .env ファイルを作成し、URLやAPIキーを設定
+## .env ファイルを作成し、URLやAPIキーを設定
 
 * .env ファイルを作成する
 * .env.sample を参考にURLやAPIキーを設定する
@@ -124,7 +116,7 @@ Python 3.11.1
 
 ```json
 {
-    "version": "0.1.0",
+    "version": "1.0.0",
     "configurations": [
         {
             "name": "ホロコレクトのモジュール実行",
