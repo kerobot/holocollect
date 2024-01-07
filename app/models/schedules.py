@@ -1,8 +1,8 @@
 import pymongo
 import csv
 from logging import getLogger
-from holocollect.models.schedule import ScheduleModel
-from holocollect.mongodb import MongoDB
+from app.models.schedule import ScheduleModel
+from app.mongodb import MongoDB
 
 class ScheduleCollection():
     """

@@ -5,7 +5,7 @@
             "name": "ホロコレクトのモジュール実行",
             "type": "python",
             "request": "launch",
-            "module": "holocollect",
+            "module": "app",
             "justMyCode": true,
             "args": ["--csvpath","c:\\temp\\holodule.csv"]
         }

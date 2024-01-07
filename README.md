@@ -9,7 +9,7 @@
 * PowerShell 7.3.8
 * Visual Studio Code 1.83
 * Git for Windows 2.41
-* MongoDB
+* MongoDB 6.0
 
 ## Poetry と pyenv の確認
 
@@ -109,7 +109,7 @@ Python 3.11.1
 ## プログラムの実行
 
 ```powershell
-> poetry run python -m holocollect --csvpath c:\temp\holodule.csv
+> poetry run python -m app --csvpath c:\temp\holodule.csv
 ```
 
 ## lounch.json の設定
@@ -122,7 +122,7 @@ Python 3.11.1
             "name": "ホロコレクトのモジュール実行",
             "type": "python",
             "request": "launch",
-            "module": "holocollect",
+            "module": "app",
             "justMyCode": true,
             "args": ["--csvpath","c:\\temp\\holodule.csv"]
         }

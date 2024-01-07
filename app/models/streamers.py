@@ -1,7 +1,7 @@
 import pymongo
 from logging import getLogger
-from holocollect.models.streamer import StreamerModel
-from holocollect.mongodb import MongoDB
+from app.models.streamer import StreamerModel
+from app.mongodb import MongoDB
 
 class StreamerCollection():
     """
@@ -12,6 +12,7 @@ class StreamerCollection():
         StreamerCollectionクラスのコンストラクタ
         """
         self._logger = getLogger(__name__)
+        # 配信者の情報はとりあえず固定で管理（グループや所属の情報を追加）
         self.streamers: dict[str, StreamerModel] = {
             "ホロライブ" : StreamerModel(code="HL0000", name="ホロライブ", group="hololive", affiliations=["bland","jp"], image_name="hololive.jpg", channel_id="@hololive"),
 

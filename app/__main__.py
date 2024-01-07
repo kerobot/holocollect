@@ -1,8 +1,8 @@
 import sys
 import os
 import argparse
-from holocollect.collector import Collector
-from holocollect.logger import get_logger
+from app.collector import Collector
+from app.logger import get_logger
 
 RETURN_SUCCESS = 0
 RETURN_FAILURE = -1

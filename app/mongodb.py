@@ -1,6 +1,6 @@
 import atexit
 from pymongo import MongoClient
-from holocollect.settings import get_mongo_settings
+from app.settings import get_mongo_settings
 
 mongo_settings = get_mongo_settings()
 
@@ -27,9 +27,10 @@ class MongoDB:
         MongoDBクラスのコンストラクタ（DB接続）
         """
         if MongoDB._instance is not None:
-            raise Exception("This class is a singleton!")
+            raise Exception("このクラスはシングルトンです。")
         else:
             MongoDB._instance = MongoClient(mongo_settings.uri)
+            # クリーンアップ関数の登録
             atexit.register(self.close)
 
     def close(self):

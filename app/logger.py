@@ -20,10 +20,10 @@ def get_logger(log_dir: str, json_path: str, verbose: bool=False) -> Logger | No
             log_config = json.load(f)
     except FileNotFoundError:
         print(f"設定ファイル {json_path} が見つかりません。")
-        return None
+        raise
     except json.JSONDecodeError:
         print(f"設定ファイル {json_path} の形式が正しくありません。")
-        return None
+        raise
 
     # ログファイル名を日付とする
     log_path = join(log_dir, f"{datetime.datetime.now().strftime('%Y%m%d')}.log")
@@ -40,7 +40,7 @@ def get_logger(log_dir: str, json_path: str, verbose: bool=False) -> Logger | No
         config.dictConfig(log_config)
     except ValueError as e:
         print(f"ログ設定の適用に失敗しました：{e}")
-        return None
+        raise
 
     # ロガーを取得
     logger = getLogger(__name__)

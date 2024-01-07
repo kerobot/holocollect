@@ -8,10 +8,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from holocollect.settings import get_youtube_settings, get_holodule_settings
-from holocollect.models.schedule import ScheduleModel
-from holocollect.models.schedules import ScheduleCollection
-from holocollect.models.streamers import StreamerCollection
+from app.settings import get_youtube_settings, get_holodule_settings
+from app.models.schedule import ScheduleModel
+from app.models.schedules import ScheduleCollection
+from app.models.streamers import StreamerCollection
 
 holodule_settings = get_holodule_settings()
 youtube_settings = get_youtube_settings()
@@ -236,12 +236,11 @@ class Collector:
         Raises:
             Exception: MongoDB への登録に失敗した場合
         """
-        # 配信者情報の登録
+        # 配信者情報のDB登録
         self.__streamers.save_to_mongodb()
-        # ホロジュール情報の登録
+        # ホロジュール情報のDB登録
         self.__schedules.save_to_mongodb()
 
-    # CSV への出力
     def output_to_csv(self, filepath: str):
         """
         ホロジュール情報を CSV へ出力する関数
@@ -252,5 +251,5 @@ class Collector:
         Raises:
             Exception: CSV への出力に失敗した場合
         """
-        # ホロジュール情報の出力
+        # ホロジュール情報のCSV出力
         self.__schedules.output_to_csv(filepath)
