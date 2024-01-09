@@ -62,11 +62,14 @@ class StreamerCollection(BaseModel):
         "風真いろは" : StreamerModel(code="HL0605", name="風真いろは", group="hololive", affiliations=["gen6","jp"], image_name="kazama_iroha.jpg", channel_id="@kazamairoha"),
 
         "hololive DEV_IS" : StreamerModel(code="HLDI00", name="hololive DEV_IS", group="hololive_DEV_IS)", affiliations=["bland","jp"], image_name="hololive_dev_is.jpg", channel_id="@hololiveDEV_IS"),
+
         "火威青" : StreamerModel(code="HLDI01", name="火威青", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="hiodoshi_ao.jpg", channel_id="@HiodoshiAo"),
         "儒烏風亭らでん" : StreamerModel(code="HLDI02", name="儒烏風亭らでん", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="juufuutei_raden.jpg", channel_id="@JuufuuteiRaden"),
         "一条莉々華" : StreamerModel(code="HLDI03", name="一条莉々華", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="otonose_kanade.jpg", channel_id="@OtonoseKanade"),
         "音乃瀬奏" : StreamerModel(code="HLDI04", name="音乃瀬奏", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="ichijou_ririka.jpg", channel_id="@IchijouRirika"),
         "轟はじめ" : StreamerModel(code="HLDI05", name="轟はじめ", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="todoroki_hajime.jpg", channel_id="@TodorokiHajime"),
+
+        "hololive ID" : StreamerModel(code="HLID00", name="hololive Indonesia", group="hololive_id)", affiliations=["bland","id"], image_name="hololive_id.jpg", channel_id="@hololiveIndonesia"),
 
         "Risu" : StreamerModel(code="HLID01", name="Ayunda Risu", group="hololive_id", affiliations=["gen1","id"], image_name="ayunda_risu.jpg", channel_id="@AyundaRisu"),
         "Moona" : StreamerModel(code="HLID02", name="Moona Hoshinova", group="hololive_id",affiliations=["gen1","id"], image_name="moona_hoshinova.jpg", channel_id="@MoonaHoshinova"),
@@ -79,6 +82,8 @@ class StreamerCollection(BaseModel):
         "Zeta" : StreamerModel(code="HLID07", name="Vestia Zeta", group="hololive_id", affiliations=["gen3","id"], image_name="vestia_zeta.jpg", channel_id="@VestiaZeta"),
         "Kaela" : StreamerModel(code="HLID08", name="Kaela Kovalskia",group="hololive_id", affiliations=["gen3","id"], image_name="kaela_kovalskia.jpg", channel_id="@KaelaKovalskia"),
         "Kobo" : StreamerModel(code="HLID09", name="Kobo Kanaeru", group="hololive_id", affiliations=["gen3","id"], image_name="kobo_kanaeru.jpg", channel_id="@KoboKanaeru"),
+
+        "hololive EN" : StreamerModel(code="HLEN00", name="hololive English", group="hololive_en)", affiliations=["bland","en"], image_name="hololive_en.jpg", channel_id="@hololiveEnglish"),
 
         "Calli" : StreamerModel(code="HLEN01", name="Mori Calliope", group="hololive_en", affiliations=["gen1","en"], image_name="mori_calliope.jpg", channel_id="@MoriCalliope"),
         "Kiara" : StreamerModel(code="HLEN02", name="Takanashi Kiara", group="hololive_en", affiliations=["gen1","en"], image_name="takanashi_kiara.jpg", channel_id="@TakanashiKiara"),
