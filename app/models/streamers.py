@@ -38,7 +38,7 @@ class StreamerCollection(BaseModel):
         "戌神ころね" : StreamerModel(code="HL0G04", name="戌神ころね", group="hololive", affiliations=["gamers","jp"], image_name="inugami_korone.jpg", channel_id="@InugamiKorone"),
 
         "兎田ぺこら" : StreamerModel(code="HL0301", name="兎田ぺこら", group="hololive", affiliations=["gen3","jp"], image_name="usada_pekora.jpg", channel_id="@usadapekora"),
-        "潤羽るしあ" : StreamerModel(code="HL0302", name="潤羽るしあ", group="hololive", affiliations=["gen3","jp"], image_name="uruha_rushia.jpg", channel_id="@hololive", is_retired=True),
+        "潤羽るしあ" : StreamerModel(code="HL0302", name="潤羽るしあ", group="hololive", affiliations=["gen3","jp"], image_name="uruha_rushia.jpg", channel_id="@UruhaRushia", is_retired=True),
         "不知火フレア" : StreamerModel(code="HL0303", name="不知火フレア", group="hololive", affiliations=["gen3","jp"], image_name="shiranui_flare.jpg", channel_id="@ShiranuiFlare"),
         "白銀ノエル" : StreamerModel(code="HL0304", name="白銀ノエル", group="hololive", affiliations=["gen3","jp"], image_name="shirogane_noel.jpg", channel_id="@ShiroganeNoel"),
         "宝鐘マリン" : StreamerModel(code="HL0305", name="宝鐘マリン", group="hololive", affiliations=["gen3","jp"], image_name="housyou_marine.jpg", channel_id="@HoushouMarine"),
@@ -53,7 +53,7 @@ class StreamerCollection(BaseModel):
         "雪花ラミィ" : StreamerModel(code="HL0502", name="雪花ラミィ", group="hololive", affiliations=["gen5","jp"], image_name="yukihana_lamy.jpg", channel_id="@YukihanaLamy"),
         "尾丸ポルカ" : StreamerModel(code="HL0503", name="尾丸ポルカ", group="hololive", affiliations=["gen5","jp"], image_name="omaru_polka.jpg", channel_id="@OmaruPolka"),
         "桃鈴ねね" : StreamerModel(code="HL0504", name="桃鈴ねね", group="hololive", affiliations=["gen5","jp"], image_name="momosuzu_nene.jpg", channel_id="@MomosuzuNene"),
-        "魔乃アロエ" : StreamerModel(code="HL0505", name="魔乃アロエ", group="hololive", affiliations=["gen5","jp"], image_name="mano_aloe.jpg", channel_id="@hololive", is_retired=True),
+        "魔乃アロエ" : StreamerModel(code="HL0505", name="魔乃アロエ", group="hololive", affiliations=["gen5","jp"], image_name="mano_aloe.jpg", channel_id="@ManoAloe", is_retired=True),
 
         "ラプラス" : StreamerModel(code="HL0601", name="ラプラス・ダークネス", group="hololive", affiliations=["gen6","jp"], image_name="laplus_darknesss.jpg", channel_id="@LaplusDarknesss"),
         "鷹嶺ルイ" : StreamerModel(code="HL0602", name="鷹嶺ルイ", group="hololive", affiliations=["gen6","jp"], image_name="takane_lui.jpg", channel_id="@TakaneLui"),
