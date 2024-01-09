@@ -119,7 +119,7 @@ class Collector:
                     streamer = self.__streamers.get_streamer_by_name(stream_name)
                     if streamer is None:
                         continue
-                    schedule = ScheduleModel(code=streamer.code, url=stream_url, streaming_at=stream_datetime, name=stream_name)
+                    schedule = ScheduleModel(code=streamer.code, url=stream_url, streaming_at=stream_datetime, name=streamer.name)
                     schedules.append(schedule)
         return schedules
 
