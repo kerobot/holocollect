@@ -13,6 +13,7 @@ from app.models.schedule import ScheduleModel
 from app.models.schedules import ScheduleCollection
 from app.models.streamers import StreamerCollection
 
+logger = getLogger(__name__)
 holodule_settings = get_holodule_settings()
 youtube_settings = get_youtube_settings()
 
@@ -25,8 +26,6 @@ class Collector:
         """
         Collectorクラスのコンストラク
         """
-        # Logger 関連
-        self._logger = getLogger(__name__)
         # WebDriver 関連
         self.__driver = None
         self.__wait = None
@@ -66,7 +65,7 @@ class Collector:
         # タイトルの取得（確認用）
         head = soup.find("head")
         title = head.find("title").text
-        self._logger.info('TITLE : %s', title)
+        logger.info('TITLE : %s', title)
 
         # TODO : ここからはページの構成に合わせて決め打ち = ページの構成が変わったら動かない
         # スケジュールの取得
@@ -139,11 +138,11 @@ class Collector:
             Exception: その他のエラーが発生した場合
         """
         try:
-            self._logger.info('YOUTUBE_URL : %s', youtube_url)
+            logger.info('YOUTUBE_URL : %s', youtube_url)
             # Youtube の URL から ID を取得
             match_video = re.search(r"^[^v]+v=(.{11}).*", youtube_url)
             if not match_video:
-                self._logger.error("YouTube URL が不正です。")
+                logger.error("YouTube URL が不正です。")
                 return None
             video_id = match_video.group(1)
 
@@ -177,14 +176,14 @@ class Collector:
                 # 取得した情報を返却
                 return (video_id, title, description, published_at, channel_id, channel_title, tags)
 
-            self._logger.error("指定したIDに一致する動画がありません。")
+            logger.error("指定したIDに一致する動画がありません。")
             return None
 
         except HttpError as e:
-            self._logger.error("HTTP エラー %d が発生しました。%s" % (e.resp.status, e.content))
+            logger.error("HTTP エラー %d が発生しました。%s" % (e.resp.status, e.content))
             raise
         except Exception as e:
-            self._logger.error("エラーが発生しました。%s" % e)
+            logger.error("エラーが発生しました。%s" % e)
             raise
 
     def get_holodules(self) -> ScheduleCollection:
@@ -210,18 +209,18 @@ class Collector:
             for schedule in self.__schedules:
                 try:
                     # ホロジュール情報に動画情報を付与
-                    self._logger.info('SCHEDULE_NAME : %s', schedule.name)
-                    self._logger.info('SCHEDULE_AT : %s', schedule.streaming_at)
+                    logger.info('SCHEDULE_NAME : %s', schedule.name)
+                    logger.info('SCHEDULE_AT : %s', schedule.streaming_at)
                     video_info = self.__get_youtube_video_info(schedule.url)
                     if video_info == None:
                         continue
                     schedule.set_video_info(*video_info)
-                    self._logger.info('SCHEDULE_TITLE : %s', schedule.title)
+                    logger.info('SCHEDULE_TITLE : %s', schedule.title)
                 except Exception as e:
-                    self._logger.error("エラーが発生しました。", exc_info=True)
+                    logger.error("エラーが発生しました。", exc_info=True)
                     raise e
         except Exception as e:
-            self._logger.error("エラーが発生しました。", exc_info=True)
+            logger.error("エラーが発生しました。", exc_info=True)
             raise e
         finally:
             # ドライバを閉じる

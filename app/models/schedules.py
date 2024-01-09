@@ -1,23 +1,18 @@
+from pydantic import BaseModel
 import pymongo
 import csv
 from logging import getLogger
 from app.models.schedule import ScheduleModel
 from app.mongodb import MongoDB
 
-class ScheduleCollection():
+logger = getLogger(__name__)
+
+class ScheduleCollection(BaseModel):
     """
     ScheduleModelオブジェクトのコレクションクラス
     """
-    def __init__(self, schedules: list[ScheduleModel] = []) -> None:
-        """
-        ScheduleCollectionクラスのコンストラクタ
-
-        Args:
-            schedules (list[ScheduleModel], optional): ScheduleModelオブジェクトのリスト（既定は []）
-        """
-        self._logger = getLogger(__name__)
-        self.schedules: list[ScheduleModel] = schedules
-        self.index: int = 0
+    schedules: list[ScheduleModel] = []
+    index: int = 0
 
     def __iter__(self) -> 'ScheduleCollection':
         """
@@ -110,11 +105,11 @@ class ScheduleCollection():
             dumps = [schedule.model_dump(by_alias=True, exclude=["id"]) for schedule in self.schedules]
             collection.insert_many(dumps)
         except pymongo.errors.ConnectionError as e:
-            self._logger.error("MongoDB 接続に失敗しました。%s", e, exc_info=True)
+            self.logger.error("MongoDB 接続に失敗しました。%s", e, exc_info=True)
             raise
         except pymongo.errors.OperationFailure as e:
-            self._logger.error("MongoDB 操作に失敗しました。%s", e, exc_info=True)
+            self.logger.error("MongoDB 操作に失敗しました。%s", e, exc_info=True)
             raise
         except pymongo.errors.PyMongoError as e:
-            self._logger.error("MongoDB エラーが発生しました。%s", e, exc_info=True)
+            self.logger.error("MongoDB エラーが発生しました。%s", e, exc_info=True)
             raise
