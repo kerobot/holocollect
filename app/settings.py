@@ -13,7 +13,7 @@ class MongoSettings(BaseSettings):
     """
     uri: str
     database: str
-    model_config = SettingsConfigDict(env_file=".env", env_prefix='mongo_')
+    model_config = SettingsConfigDict(env_file=".env", env_prefix='mongo_', extra="ignore")
 
 class YoutubeSettings(BaseSettings):
     """
@@ -30,7 +30,7 @@ class YoutubeSettings(BaseSettings):
     api_service_name: str
     api_version: str
     url_pattern: str
-    model_config = SettingsConfigDict(env_file=".env", env_prefix='youtube_')
+    model_config = SettingsConfigDict(env_file=".env", env_prefix='youtube_', extra="ignore")
 
 class HoloduleSettings(BaseSettings):
     """
@@ -41,7 +41,7 @@ class HoloduleSettings(BaseSettings):
         model_config (SettingsConfigDict): モデルの設定辞書
     """
     url: str
-    model_config = SettingsConfigDict(env_file=".env", env_prefix='holodule_')
+    model_config = SettingsConfigDict(env_file=".env", env_prefix='holodule_', extra="ignore")
 
     async def check_holodule_url(self) -> bool:
         """
