@@ -103,6 +103,11 @@ class StreamerCollection(BaseModel):
         "Bijou" : StreamerModel(code="HLEN13", name="Koseki Bijou", group="hololive_en", affiliations=["gen3","en"],image_name="koseki_bijou.jpg", channel_id="@KosekiBijou"),
         "Nerissa" : StreamerModel(code="HLEN14", name="Nerissa Ravencroft", group="hololive_en", affiliations=["gen3","en"], image_name="nerissa_ravencroft.jpg", channel_id="@NerissaRavencroft"),
         "FUWAMOCO" : StreamerModel(code="HLEN15", name="FUWAMOCO", group="hololive_en", affiliations=["gen3","en"], image_name="fuwamoco.jpg", channel_id="@FUWAMOCOch"),
+
+        "Elizabeth" : StreamerModel(code="HLEN16", name="Elizabeth Rose Bloodflame", group="hololive_en", affiliations=["gen4","en"], image_name="elizabeth_rose_bloodflame.jpg", channel_id="@holoen_erbloodflame"),
+        "Gigi" : StreamerModel(code="HLEN17", name="Gigi Murin", group="hololive_en", affiliations=["gen4","en"],image_name="gigi_murin.jpg", channel_id="@holoen_gigimurin"),
+        "Cecilia" : StreamerModel(code="HLEN18", name="Cecilia Immergreen", group="hololive_en", affiliations=["gen4","en"], image_name="cecilia_immergreen.jpg", channel_id="@holoen_ceciliaimmergreen"),
+        "Raora" : StreamerModel(code="HLEN19", name="Raora Panthera", group="hololive_en", affiliations=["gen4","en"], image_name="raora_panthera.jpg", channel_id="@holoen_raorapanthera"),
     }
 
     def get_streamer_by_name(self, name: str) -> StreamerModel | None:
