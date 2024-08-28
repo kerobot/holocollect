@@ -21,13 +21,13 @@ class StreamerCollection(BaseModel):
         "星街すいせい" : StreamerModel(code="HL0004", name="星街すいせい", group="hololive", affiliations=["gen0","jp"], image_name="hoshimachi_suisei.jpg", channel_id="@HoshimachiSuisei"),
         "AZKi" : StreamerModel(code="HL0005", name="AZKi", group="hololive", affiliations=["gen0","jp"], image_name="azki.jpg", channel_id="@AZKi"),
 
-        "夜空メル" : StreamerModel(code="HL0101", name="夜空メル", group="hololive", affiliations=["gen1","jp"], image_name="yozora_mel.jpg", channel_id="@YozoraMel"),
+        "夜空メル" : StreamerModel(code="HL0101", name="夜空メル", group="hololive", affiliations=["gen1","jp"], image_name="yozora_mel.jpg", channel_id="@YozoraMel", is_retired=True),
         "アキ・ローゼンタール" : StreamerModel(code="HL0102", name="アキ・ローゼンタール", group="hololive", affiliations=["gen1","jp"], image_name="aki_rosenthal.jpg", channel_id="@AkiRosenthal"),
         "赤井はあと" : StreamerModel(code="HL0103", name="赤井はあと", group="hololive", affiliations=["gen1","jp"], image_name="haachama.jpg", channel_id="@AkaiHaato"),
         "白上フブキ" : StreamerModel(code="HL0104", name="白上フブキ", group="hololive", affiliations=["gen1","gamers","jp"], image_name="shirakami_fubuki.jpg", channel_id="@ShirakamiFubuki"),
         "夏色まつり" : StreamerModel(code="HL0105", name="夏色まつり", group="hololive", affiliations=["gen1","jp"], image_name="natsuiro_matsuri.jpg", channel_id="@NatsuiroMatsuri"),
 
-        "湊あくあ" : StreamerModel(code="HL0201", name="湊あくあ", group="hololive", affiliations=["gen2","jp"], image_name="minato_aqua.jpg", channel_id="@MinatoAqua"),
+        "湊あくあ" : StreamerModel(code="HL0201", name="湊あくあ", group="hololive", affiliations=["gen2","jp"], image_name="minato_aqua.jpg", channel_id="@MinatoAqua", is_retired=True),
         "紫咲シオン" : StreamerModel(code="HL0202", name="紫咲シオン", group="hololive", affiliations=["gen2","jp"], image_name="murasaki_shion.jpg", channel_id="@MurasakiShion"),
         "百鬼あやめ" : StreamerModel(code="HL0203", name="百鬼あやめ", group="hololive", affiliations=["gen2","jp"], image_name="nakiri_ayame.jpg", channel_id="@NakiriAyame"),
         "癒月ちょこ" : StreamerModel(code="HL0204", name="癒月ちょこ", group="hololive", affiliations=["gen2","jp"], image_name="yuzuki_choco.jpg", channel_id="@YuzukiChoco"),
