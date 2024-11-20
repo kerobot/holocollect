@@ -63,11 +63,17 @@ class StreamerCollection(BaseModel):
 
         "hololive DEV_IS" : StreamerModel(code="HLDI00", name="hololive DEV_IS", group="hololive_DEV_IS)", affiliations=["bland","jp"], image_name="hololive_dev_is.jpg", channel_id="@hololiveDEV_IS"),
 
-        "火威青" : StreamerModel(code="HLDI01", name="火威青", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="hiodoshi_ao.jpg", channel_id="@HiodoshiAo"),
-        "儒烏風亭らでん" : StreamerModel(code="HLDI02", name="儒烏風亭らでん", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="juufuutei_raden.jpg", channel_id="@JuufuuteiRaden"),
-        "一条莉々華" : StreamerModel(code="HLDI03", name="一条莉々華", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="otonose_kanade.jpg", channel_id="@OtonoseKanade"),
-        "音乃瀬奏" : StreamerModel(code="HLDI04", name="音乃瀬奏", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="ichijou_ririka.jpg", channel_id="@IchijouRirika"),
-        "轟はじめ" : StreamerModel(code="HLDI05", name="轟はじめ", group="hololive_DEV_IS", affiliations=["dev_is","jp"], image_name="todoroki_hajime.jpg", channel_id="@TodorokiHajime"),
+        "火威青" : StreamerModel(code="HLDI01", name="火威青", group="hololive_DEV_IS", affiliations=["dev_is","regloss","jp"], image_name="hiodoshi_ao.jpg", channel_id="@HiodoshiAo"),
+        "儒烏風亭らでん" : StreamerModel(code="HLDI02", name="儒烏風亭らでん", group="hololive_DEV_IS", affiliations=["dev_is","regloss","jp"], image_name="juufuutei_raden.jpg", channel_id="@JuufuuteiRaden"),
+        "一条莉々華" : StreamerModel(code="HLDI03", name="一条莉々華", group="hololive_DEV_IS", affiliations=["dev_is","regloss","jp"], image_name="otonose_kanade.jpg", channel_id="@OtonoseKanade"),
+        "音乃瀬奏" : StreamerModel(code="HLDI04", name="音乃瀬奏", group="hololive_DEV_IS", affiliations=["dev_is","regloss","jp"], image_name="ichijou_ririka.jpg", channel_id="@IchijouRirika"),
+        "轟はじめ" : StreamerModel(code="HLDI05", name="轟はじめ", group="hololive_DEV_IS", affiliations=["dev_is","regloss","jp"], image_name="todoroki_hajime.jpg", channel_id="@TodorokiHajime"),
+
+        "響咲リオナ" : StreamerModel(code="HLDI06", name="響咲リオナ", group="hololive_DEV_IS", affiliations=["dev_is","flowglow","jp"], image_name="isaki_riona.jpg", channel_id="@IsakiRiona"),
+        "輪堂千速" : StreamerModel(code="HLDI07", name="輪堂千速", group="hololive_DEV_IS", affiliations=["dev_is","flowglow","jp"], image_name="rindo_chihaya.jpg", channel_id="@RindoChihaya"),
+        "虎金妃笑虎" : StreamerModel(code="HLDI08", name="虎金妃笑虎", group="hololive_DEV_IS", affiliations=["dev_is","flowglow","jp"], image_name="koganei_niko.jpg", channel_id="@KoganeiNiko"),
+        "水宮枢" : StreamerModel(code="HLDI09", name="水宮枢", group="hololive_DEV_IS", affiliations=["dev_is","flowglow","jp"], image_name="mizumiya_su.jpg", channel_id="@MizumiyaSu"),
+        "綺々羅々ヴィヴィ" : StreamerModel(code="HLDI10", name="綺々羅々ヴィヴィ", group="hololive_DEV_IS", affiliations=["dev_is","flowglow","jp"], image_name="kikirara_vivi.jpg", channel_id="@KikiraraVivi"),
 
         "holo ID" : StreamerModel(code="HLID00", name="hololive Indonesia", group="hololive_id)", affiliations=["bland","id"], image_name="hololive_id.jpg", channel_id="@hololiveIndonesia"),
 
