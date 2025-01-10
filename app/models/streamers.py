@@ -58,7 +58,7 @@ class StreamerCollection(BaseModel):
         "ラプラス" : StreamerModel(code="HL0601", name="ラプラス・ダークネス", group="hololive", affiliations=["gen6","jp"], image_name="laplus_darknesss.jpg", channel_id="@LaplusDarknesss"),
         "鷹嶺ルイ" : StreamerModel(code="HL0602", name="鷹嶺ルイ", group="hololive", affiliations=["gen6","jp"], image_name="takane_lui.jpg", channel_id="@TakaneLui"),
         "博衣こより" : StreamerModel(code="HL0603", name="博衣こより", group="hololive", affiliations=["gen6","jp"], image_name="hakui_koyori.jpg", channel_id="@HakuiKoyori"),
-        "沙花叉クロヱ" : StreamerModel(code="HL0604", name="沙花叉クロヱ", group="hololive", affiliations=["gen6","jp"], image_name="sakamata_chloe.jpg", channel_id="@SakamataChloe"),
+        "沙花叉クロヱ" : StreamerModel(code="HL0604", name="沙花叉クロヱ", group="hololive", affiliations=["gen6","jp"], image_name="sakamata_chloe.jpg", channel_id="@SakamataChloe", is_retired=True),
         "風真いろは" : StreamerModel(code="HL0605", name="風真いろは", group="hololive", affiliations=["gen6","jp"], image_name="kazama_iroha.jpg", channel_id="@kazamairoha"),
 
         "hololive DEV_IS" : StreamerModel(code="HLDI00", name="hololive DEV_IS", group="hololive_DEV_IS)", affiliations=["bland","jp"], image_name="hololive_dev_is.jpg", channel_id="@hololiveDEV_IS"),
@@ -95,11 +95,11 @@ class StreamerCollection(BaseModel):
         "Kiara" : StreamerModel(code="HLEN02", name="Takanashi Kiara", group="hololive_en", affiliations=["gen1","en"], image_name="takanashi_kiara.jpg", channel_id="@TakanashiKiara"),
         "Ina" : StreamerModel(code="HLEN03", name="Ninomae Ina'nis", group="hololive_en", affiliations=["gen1","en"], image_name="ninomae_ina'nis.jpg", channel_id="@NinomaeInanis"),
         "Gura" : StreamerModel(code="HLEN04", name="Gawr Gura", group="hololive_en", affiliations=["gen1","en"], image_name="gawr_gura.jpg", channel_id="@GawrGura"),
-        "Amelia" : StreamerModel(code="HLEN05", name="Watson Amelia", group="hololive_en", affiliations=["gen1","en"], image_name="watson_amelia.jpg", channel_id="@WatsonAmelia"),
+        "Amelia" : StreamerModel(code="HLEN05", name="Watson Amelia", group="hololive_en", affiliations=["gen1","en"], image_name="watson_amelia.jpg", channel_id="@WatsonAmelia", is_retired=True),
 
         "IRyS" : StreamerModel(code="HLEN06", name="IRyS", group="hololive_en", affiliations=["hope","gen2","en"], image_name="irys.jpg", channel_id="@IRyS"),
 
-        "Fauna" : StreamerModel(code="HLEN07", name="Ceres Fauna", group="hololive_en", affiliations=["gen2","en"], image_name="ceres_fauna.jpg", channel_id="@CeresFauna"),
+        "Fauna" : StreamerModel(code="HLEN07", name="Ceres Fauna", group="hololive_en", affiliations=["gen2","en"], image_name="ceres_fauna.jpg", channel_id="@CeresFauna", is_retired=True),
         "Kronii" : StreamerModel(code="HLEN08", name="Ouro Kronii", group="hololive_en", affiliations=["gen2","en"], image_name="ouro_kronii.jpg", channel_id="@OuroKronii"),
         "Mumei" : StreamerModel(code="HLEN09", name="Nanashi Mumei", group="hololive_en", affiliations=["gen2","en"], image_name="nanashi_mumei.jpg", channel_id="@NanashiMumei"),
         "Baelz" : StreamerModel(code="HLEN10", name="Hakos Baelz", group="hololive_en", affiliations=["gen2","en"], image_name="hakos_baelz.jpg", channel_id="@HakosBaelz"),
